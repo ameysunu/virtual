@@ -1,5 +1,15 @@
-import hashlib
 import docker
+
+
+def fun(message, client):
+    container = client.containers.run(
+        "eon01/md5summer", environment=["var=%s" % message], detach=True)
+    logs = container.logs()
+
+    for line in container.logs(stream=True):
+        print(line.strip())
+
+
 client = docker.from_env()
 messages = [
     "c4ca4238a0b923820dcc509a6f75849b",
@@ -17,7 +27,4 @@ messages = [
 ]
 
 for message in messages:
-
-    container = client.containers.run("eon01/md5summer", environment=[
-                                      "var=%s" % message], detach=True)
-    print(container.logs())
+    fun(message, client)
