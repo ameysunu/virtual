@@ -7,7 +7,8 @@ docker build -t eon01/md5summer .
 
 ### Single Threaded :
 ```
-time python singlethread.py
+pip3 install docker
+time python3 singlethread.py
 ```
 ### Multi Threaded :
 ```
